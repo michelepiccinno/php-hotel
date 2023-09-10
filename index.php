@@ -58,14 +58,14 @@
 
   <div class="container mt-5">
 
-    <form method="GET">
-      <select name="Parcheggio">
+    <form method="GET" class="mb-3">
+      <select name="Parcheggio" class="me-2">
         <option value='NULL'>Parcheggio</option>
         <option value="1">Si</option>
         <option value="0">No</option>
       </select>
 
-      <select name="Valutazione">
+      <select name="Valutazione" class="me-2">
         <option value="0">Valutazione</option>
         <option value="0">0</option>
         <option value="1">1</option>
@@ -81,11 +81,11 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Nome</th>
-          <th>Descrizione</th>
-          <th>Parcheggio</th>
-          <th>Voto</th>
-          <th>Distanza dal centro</th>
+          <th class="border-dark table-primary">Nome</th>
+          <th class="border-dark table-primary">Descrizione</th>
+          <th class="border-dark table-primary">Parcheggio</th>
+          <th class="border-dark table-primary">Voto</th>
+          <th class="border-dark table-primary">Distanza dal centro</th>
         </tr>
       </thead>
       <tbody>
@@ -94,7 +94,6 @@
 
         $parkingValue = $_GET["Parcheggio"] ?? 'NULL';
         $ratingValue = $_GET["Valutazione"] ?? 0;
-var_dump($hotels);
         foreach ($hotels as $hotel) {
           if ((
               ($parkingValue === 'NULL') ||
@@ -110,16 +109,28 @@ var_dump($hotels);
               <th><?php echo $hotel['name'] ?></th>
               <td><?php echo $hotel['description'] ?></td>
               <td><?php echo $hotel['parking'] ? 'Si' : 'No' ?></td>
-              <td><?php echo $hotel['vote'] ?></td>
+              <td>
+                <?php {
+                  for ($i = 0; $i < $hotel['vote']; $i++) {
+                    echo ('<i class="fa-solid fa-star"></i>');
+                  }  ?>
+              </td>
               <td><?php echo $hotel['distance_to_center'] ?></td>
             </tr>
 
-        <?php
-          } //IF
-        } //FOREACH
-        ?>
+      <?php
+                } //FOR
+              } //IF
+            } //FOREACH
+      ?>
 
   </div>
 </body>
 
 </html>
+
+<style>
+  i {
+    color: #ECE20D;
+  }
+</style>
